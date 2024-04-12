@@ -22,7 +22,7 @@ body {
   transition: var(--animation-time) ease-in-out;
 }
 
-body:hover {
+body:has(.swap-theme-button-container > input:checked) {
   background-color: var(--dark-theme-background-color);
 }
 
@@ -38,6 +38,12 @@ body > .swap-theme-button-container {
   display: flex;
   border-radius: 10px;
   color: var(--light-theme-background-color);
+  z-index: 999;
+}
+
+body > .swap-theme-button-container:has(input:checked) {
+  background-color: var(--dark-theme-color);
+  color: var(--dark-theme-background-color);
 }
 
 body > .swap-theme-button-container > label {
@@ -49,8 +55,55 @@ body > .swap-theme-button-container > label {
   cursor: pointer;
 }
 
-body > .swap-theme-button-container > label > .material-symbols-outlined {
+body > .swap-theme-button-container > label > .theme-icon-container {
+  width: calc(var(--font-size) * 2);
+  height: calc(var(--font-size) * 2);
+  position: relative;
+  transition: all var(--animation-time) ease-in-out;
+}
+
+body
+  > .swap-theme-button-container
+  > label
+  > .theme-icon-container
+  > .material-symbols-outlined {
   font-size: calc(var(--font-size) * 2);
+}
+
+body
+  > .swap-theme-button-container
+  > label
+  > .theme-icon-container
+  > .light_mode-icon {
+  font-size: calc(var(--font-size) * 2);
+  position: absolute;
+  opacity: 1;
+}
+
+body
+  > .swap-theme-button-container
+  > label
+  > .theme-icon-container
+  > .dark_mode-icon {
+  font-size: calc(var(--font-size) * 2);
+  position: absolute;
+  opacity: 0;
+}
+
+body
+  > .swap-theme-button-container:has(input:checked)
+  > label
+  > .theme-icon-container
+  > .light_mode-icon {
+  opacity: 0;
+}
+
+body
+  > .swap-theme-button-container:has(input:checked)
+  > label
+  > .theme-icon-container
+  > .dark_mode-icon {
+  opacity: 1;
 }
 
 body > .swap-theme-button-container > input {
@@ -72,7 +125,9 @@ body > .background-theme-container > .rotate-part {
   transition: var(--animation-time) ease-in-out;
 }
 
-body > .background-theme-container > .rotate-part:hover {
+body:has(.swap-theme-button-container > input:checked)
+  > .background-theme-container
+  > .rotate-part {
   transform: rotate(180deg);
 }
 
